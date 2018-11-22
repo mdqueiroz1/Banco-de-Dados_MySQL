@@ -1,10 +1,10 @@
 insert into instituto values
-  ('1', 'agrarias'),-- 1
-  ('2', 'engenharias'), -- 2
-  ('3', 'biologicas'), -- 3
-  ('4', 'exatas e da terra'), -- 4
+  ('1', 'agrarias'),
+  ('2', 'engenharias'),
+  ('3', 'biologicas'),
+  ('4', 'exatas e da terra'),
   ('5', 'humanas'), -- 5
-  ('6', 'sociais e aplicadas'), -- 6
+  ('6', 'sociais e aplicadas'),
   ('7', 'saude');
 
 insert into curso values

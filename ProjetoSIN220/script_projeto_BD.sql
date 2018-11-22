@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`funcionario` (
   `nome` VARCHAR(45) NULL,
   `sexo` enum('M','F') NULL,
   `cpf` DECIMAL(9,0) NULL,
-  `identidade` INT NULL,
+  `identidade` DECIMAL(10,0) NULL,
   `UFidentidade` enum('AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO') NULL,
   `orgaoExpedidor` enum('SSP','CARTORIO CIVIL','POLICIA FEDERAL','DETRAN') NULL,
   `endereço` VARCHAR(30) NULL,
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`funcionario` (
   `mae` VARCHAR(30)NULL,
   `pai` varchar(30) NULL,
   `cidade` VARCHAR(45)NULL,
-  `nacionalidade` VARCHAR(45)null,
+  `nacionalidade` VARCHAR(45)null default 'Brasilero(a)',
   `nrTituloEleitor` DECIMAL(12,0)NULL,
   `zonaTituloEleitor` decimal(3,0)NULL,
   `sessaoTituloEleitor` decimal(3,0)NULL,
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`dependente` (
   `sexo` enum('M','F') NULL,
   `cpf` DECIMAL(9,0) NULL,
   `identidade` VARCHAR(10) NULL,
-  INDEX `fk_dependente_funcionario1_idx` (`funcionario_idFuncionario` ASC) VISIBLE,
+  INDEX `fk_dependente_funcionario1_idx` (`funcionario_idFuncionario` ASC),
   PRIMARY KEY (`funcionario_idFuncionario`),
   CONSTRAINT `fk_dependente_funcionario1`
     FOREIGN KEY (`funcionario_idFuncionario`)
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`curso` (
   `Instituto_idInstituto` INT NOT NULL,
   `nome_curso` VARCHAR(45) NULL,
   PRIMARY KEY (`idCurso`, `Instituto_idInstituto`),
-  INDEX `fk_curso_Instituto1_idx` (`Instituto_idInstituto` ASC) VISIBLE,
+  INDEX `fk_curso_Instituto1_idx` (`Instituto_idInstituto` ASC) ,
   CONSTRAINT `fk_curso_Instituto1`
     FOREIGN KEY (`Instituto_idInstituto`)
     REFERENCES `mydb`.`Instituto` (`idInstituto`)
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`aluno` (
   `sesaoTituloEleitor` INT NULL,
   `ufTituloEleitor` VARCHAR(2) NULL,
   PRIMARY KEY (`matricula`),
-  INDEX `fk_aluno_curso1_idx` (`curso_idCurso` ASC) VISIBLE,
+  INDEX `fk_aluno_curso1_idx` (`curso_idCurso` ASC) ,
   CONSTRAINT `fk_aluno_curso1`
     FOREIGN KEY (`curso_idCurso`)
     REFERENCES `mydb`.`curso` (`idCurso`)
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`periodo` (
   `curso_idCurso` INT NOT NULL,
   `disciplina_idDisciplina` INT NOT NULL,
   `anoPeriodo` YEAR(4) NULL,
-  INDEX `fk_periodo_curso1_idx` (`curso_idCurso` ASC) VISIBLE,
+  INDEX `fk_periodo_curso1_idx` (`curso_idCurso` ASC),
   PRIMARY KEY (`idPeriodo`),
   CONSTRAINT `fk_periodo_disciplina1`
     FOREIGN KEY (`disciplina_idDisciplina`)
@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`cargo` (
   `data_inicio` DATE NULL,
   `data_fim` DATE NULL,
   `cargo_nome` VARCHAR(20) NULL,
-  INDEX `fk_cargo_funcionario1_idx` (`funcionario_idFuncionario` ASC) VISIBLE,
+  INDEX `fk_cargo_funcionario1_idx` (`funcionario_idFuncionario` ASC),
   PRIMARY KEY (`idCargo`),
   CONSTRAINT `fk_cargo_funcionario1`
     FOREIGN KEY (`funcionario_idFuncionario`)
@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`disciplina` (
   `carga_hora_pratica` TIME NULL,
   `semestreOfertado` ENUM('1','2') NULL,
   PRIMARY KEY (`idDisciplina`),
-  INDEX `fk_disciplina_funcionario1_idx` (`funcionario_idFuncionario` ASC) VISIBLE,
+  INDEX `fk_disciplina_funcionario1_idx` (`funcionario_idFuncionario` ASC),
   CONSTRAINT `fk_disciplina_funcionario1`
     FOREIGN KEY (`funcionario_idFuncionario`)
     REFERENCES `mydb`.`funcionario` (`idFuncionario`)
@@ -208,8 +208,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`disciplina_has_curso` (
   `curso_idCurso` INT NOT NULL,
   `disciplina_idDisciplina` INT NOT NULL,
   PRIMARY KEY (`curso_idCurso`, `disciplina_idDisciplina`),
-  INDEX `fk_curso_has_disciplina_disciplina1_idx` (`disciplina_idDisciplina` ASC) VISIBLE,
-  INDEX `fk_curso_has_disciplina_curso1_idx` (`curso_idCurso` ASC) VISIBLE,
+  INDEX `fk_curso_has_disciplina_disciplina1_idx` (`disciplina_idDisciplina` ASC),
+  INDEX `fk_curso_has_disciplina_curso1_idx` (`curso_idCurso` ASC),
   CONSTRAINT `fk_curso_has_disciplina_curso1`
     FOREIGN KEY (`curso_idCurso`)
     REFERENCES `mydb`.`curso` (`idCurso`)
