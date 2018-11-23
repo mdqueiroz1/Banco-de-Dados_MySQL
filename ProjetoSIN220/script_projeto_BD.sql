@@ -19,18 +19,19 @@ USE `mydb` ;
 
 -- -----------------------------------------------------
 -- Table `mydb`.`funcionario`
+-- (idFuncionario,cargo,nome,sexo,cpf,identidade,UFidentidad,eorgaoExpedidor,endereço,DataNascimento,
+-- mae,pai,cidade,nacionalidade,nrTituloEleitor,zonaTituloEleitor,sessaoTituloEleitor,localTituloEleitor,
+-- cidadeNascimento)
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`funcionario` (
   `idFuncionario` INT NOT NULL auto_increment,
-  `cargo` VARCHAR(20) NULL,
   `nome` VARCHAR(45) NULL,
   `sexo` enum('M','F') NULL,
   `cpf` DECIMAL(9,0) NULL,
-  `identidade` DECIMAL(10,0) NULL,
+  `identidade` varchar(11) NULL,
   `UFidentidade` enum('AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO') NULL,
   `orgaoExpedidor` enum('SSP','CARTORIO CIVIL','POLICIA FEDERAL','DETRAN') NULL,
   `endereço` VARCHAR(30) NULL,
-  `telefone` DECIMAL(9,0) NULL,
   `DataNascimento` DATE NULL,
   `mae` VARCHAR(30)NULL,
   `pai` varchar(30) NULL,
@@ -99,7 +100,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`aluno` (
   `matricula` INT NOT NULL auto_increment,
   `curso_idCurso` INT NOT NULL,
   `nomeAluno` VARCHAR(45) NULL,
-  `sexo` enum('M','F') NULL,
+  `anoInicio` date NULL,
+  `sexo` ENUM('M','F') NULL,
   `enderecoLocal` VARCHAR(45) NULL,
   `enderecoResponsavel` VARCHAR(45) NULL,
   `telefone` DECIMAL(11,0) NULL,
@@ -156,17 +158,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`cargo` (
   `idCargo` INT NOT NULL,
-  `funcionario_idFuncionario` INT NOT NULL,
-  `data_inicio` DATE NULL,
-  `data_fim` DATE NULL,
-  `cargo_nome` VARCHAR(20) NULL,
-  INDEX `fk_cargo_funcionario1_idx` (`funcionario_idFuncionario` ASC),
-  PRIMARY KEY (`idCargo`),
-  CONSTRAINT `fk_cargo_funcionario1`
-    FOREIGN KEY (`funcionario_idFuncionario`)
-    REFERENCES `mydb`.`funcionario` (`idFuncionario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `cargo_nome` VARCHAR(45) NULL,
+  PRIMARY KEY (`idCargo`)
+  )
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
