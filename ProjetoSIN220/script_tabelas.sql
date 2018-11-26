@@ -30,7 +30,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`curso` (
     `idCurso` INT NOT NULL,
     `Instituto_idInstituto` INT NOT NULL,
     `nome_curso` VARCHAR(45),
+    
     PRIMARY KEY (`idCurso` , `Instituto_idInstituto`),
+    
     FOREIGN KEY (`Instituto_idInstituto`)
         REFERENCES `mydb`.`Instituto` (`idInstituto`)
         ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -45,7 +47,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`aluno` (
     `curso_idCurso` INT NOT NULL,
     `anoConclusaoEnsMed` YEAR(4),
     `escola2oGrau` VARCHAR(45),
+    
     PRIMARY KEY (`matricula` , `curso_idCurso`),
+    
     FOREIGN KEY (`curso_idCurso`)
         REFERENCES `mydb`.`curso` (`idCurso`)
         ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -59,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`funcionario` (
     `idFuncionario` INT NOT NULL AUTO_INCREMENT,
     `atua` ENUM('tecnico', 'professor'),
     `funcionario_idFuncionario` INT,
+    
     PRIMARY KEY (`idFuncionario`)
 )  ENGINE=INNODB;
 
@@ -88,9 +93,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`registro` (
     `localTituloEleitor` VARCHAR(45),
     `cidadeNascimento` VARCHAR(45),
     `telefone` VARCHAR(11),
+    
     FOREIGN KEY (`aluno_matricula`)
         REFERENCES `mydb`.`aluno` (`matricula`)
         ON DELETE NO ACTION ON UPDATE NO ACTION,
+    
     FOREIGN KEY (`funcionario_idFuncionario`)
         REFERENCES `mydb`.`funcionario` (`idFuncionario`)
         ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -108,6 +115,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`dependente` (
     `sexo` ENUM('M', 'F'),
     `cpf` VARCHAR(9),
     `identidade` VARCHAR(10),
+    
     FOREIGN KEY (`funcionario_idFuncionario`)
         REFERENCES `mydb`.`funcionario` (`idFuncionario`)
         ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -119,17 +127,14 @@ CREATE TABLE IF NOT EXISTS `mydb`.`dependente` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`disciplina` (
     `idDisciplina` VARCHAR(6) NOT NULL,
-    `aluno_matricula` INT,
-    `aluno_curso_idCurso` INT,
-    `nome_discipilina` VARCHAR(45),
+    `nome_discipilina` VARCHAR(55),
     `creditos` INT,
     `carga_hora_teorica` INT,
     `carga_hora_pratica` INT,
-    `semestreOfertado` ENUM('1', '2', '3'),
-    PRIMARY KEY (`idDisciplina`),
-    FOREIGN KEY (`aluno_matricula` , `aluno_curso_idCurso`)
-        REFERENCES `mydb`.`aluno` (`matricula` , `curso_idCurso`)
-        ON DELETE NO ACTION ON UPDATE NO ACTION
+    `semestreOfertado` ENUM('1', '2', '3') ,
+    
+     PRIMARY KEY (`idDisciplina`)
+
 )  ENGINE=INNODB;
 
 
@@ -137,17 +142,20 @@ CREATE TABLE IF NOT EXISTS `mydb`.`disciplina` (
 -- Table `mydb`.`periodo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`periodo` (
-    `idPeriodo` INT NOT NULL,
-    `curso_idCurso` INT,
-    `disciplina_idDisciplina` VARCHAR(6),
+    `idPeriodo` enum('1','2'),
+    `periodo_idCurso` int,
+    `periodo_idDisciplina` VARCHAR(6),
     `anoPeriodo` YEAR(4) DEFAULT '2018',
-    PRIMARY KEY (`idPeriodo`),
-    FOREIGN KEY (`disciplina_idDisciplina`)
+    
+    FOREIGN KEY (`periodo_idDisciplina`)
         REFERENCES `mydb`.`disciplina` (`idDisciplina`)
-        ON DELETE NO ACTION ON UPDATE NO ACTION,
-    FOREIGN KEY (`curso_idCurso`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+   
+   FOREIGN KEY (`periodo_idCurso`)
         REFERENCES `mydb`.`curso` (`idCurso`)
-        ON DELETE NO ACTION ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
 )  ENGINE=INNODB;
 
 
@@ -156,20 +164,20 @@ CREATE TABLE IF NOT EXISTS `mydb`.`periodo` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`turma` (
     `disciplina_idDisciplina` VARCHAR(6),
-    `periodo_disciplina_idDisciplina` VARCHAR(6),
     `periodo_curso_idCurso` INT,
     `nrSala` VARCHAR(10),
     `dia` DATE,
     `hora` TIME,
-    FOREIGN KEY (`disciplina_idDisciplina`)
+   
+   FOREIGN KEY (`disciplina_idDisciplina`)
         REFERENCES `mydb`.`disciplina` (`idDisciplina`)
-        ON DELETE NO ACTION ON UPDATE NO ACTION,
-    FOREIGN KEY (`periodo_disciplina_idDisciplina`)
-        REFERENCES `mydb`.`periodo` (`disciplina_idDisciplina`)
-        ON DELETE NO ACTION ON UPDATE NO ACTION,
-    FOREIGN KEY (`periodo_curso_idCurso`)
-        REFERENCES `mydb`.`periodo` (`curso_idCurso`)
-        ON DELETE NO ACTION ON UPDATE NO ACTION
+        ON DELETE NO ACTION 
+        ON UPDATE NO ACTION,
+   
+   FOREIGN KEY (`periodo_curso_idCurso`)
+        REFERENCES `mydb`.`periodo` (`periodo_idCurso`)
+        ON DELETE NO ACTION 
+        ON UPDATE NO ACTION
 )  ENGINE=INNODB;
 
 
@@ -177,14 +185,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`turma` (
 -- Table `mydb`.`cargo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`cargo` (
+	`funcionario_idFuncionario` INT,
     `cargo_idCargo` INT,
     `data_inicio` DATE,
     `data_fim` DATE,
-    `funcionario_idFuncionario` INT,
-    FOREIGN KEY (`funcionario_idFuncionario`)
+   
+   FOREIGN KEY (`funcionario_idFuncionario`)
         REFERENCES `mydb`.`funcionario` (`idFuncionario`)
         ON DELETE NO ACTION ON UPDATE NO ACTION,
-    FOREIGN KEY (`cargo_idCargo`)
+   
+   FOREIGN KEY (`cargo_idCargo`)
         REFERENCES `mydb`.`cargosDisponiveis` (`idCargo`)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 )  ENGINE=INNODB;
@@ -220,9 +230,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`disciplina_has_curso` (
 -- Table `mydb`.`prerequisito`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`prerequisito` (
-    `disciplina_idDisciplina` varchar(6) NOT NULL,
+    `disciplina_idDisciplina` varchar(6),
     `nomePrerequisito` VARCHAR(35),
-    PRIMARY KEY (`disciplina_idDisciplina`),
     
     FOREIGN KEY (`disciplina_idDisciplina`)
         REFERENCES `mydb`.`disciplina` (`idDisciplina`)

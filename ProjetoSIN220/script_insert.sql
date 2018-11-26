@@ -91,6 +91,7 @@ values
 ('SIN499', 'Trabalho de Conclusão de Curso II', '0','0','14','3');
 
 insert into prerequisito
+(`disciplina_idDisciplina`,`nomePrerequisito`)
 values
 ( 'CRP192','CRP191, CRP199'),
 ( 'CRP298','CRP191, CRP199'),
@@ -157,7 +158,7 @@ values
 (10,'SIN499');
 
 insert into periodo
-(idPeriodo,curso_idCurso,disciplina_idDisciplina,anoPeriodo)
+(`idPeriodo`,`periodo_idCurso`,`periodo_idDisciplina`,`anoPeriodo`)
 values
 (2,10,'SIN110',default),
 (2,10,'SIN100',default),
