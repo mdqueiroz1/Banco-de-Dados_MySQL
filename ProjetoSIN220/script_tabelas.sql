@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`aluno` (
     `matricula` INT NOT NULL AUTO_INCREMENT,
     `nome` VARCHAR(45),
     `curso_idCurso` INT NOT NULL,
-    `anoConclusaoEnsMed` YEAR(4),
+    `entrada_curso` YEAR(4),
     `escola2oGrau` VARCHAR(45),
     
     PRIMARY KEY (`matricula` , `curso_idCurso`),
@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`dependente` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`disciplina` (
     `idDisciplina` VARCHAR(6) NOT NULL,
-    `nome_discipilina` VARCHAR(55),
+    `nome_disciplina` VARCHAR(55),
     `creditos` INT,
     `carga_hora_teorica` INT,
     `carga_hora_pratica` INT,

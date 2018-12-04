@@ -1,17 +1,17 @@
 SET FOREIGN_KEY_CHECKS=0;
 
 insert into instituto values
-	('1', 'agrarias'),
-	('2', 'engenharias'),
-	('3', 'biologicas'),
-	('4', 'exatas e da terra'),
-	('5', 'humanas'), 
-	('6', 'sociais e aplicadas'),
-	('7', 'saude');
+	('1', 'Agrarias'),
+	('2', 'Engenharias'),
+	('3', 'Biologicas'),
+	('4', 'Exatas e da terra'),
+	('5', 'Humanas'), 
+	('6', 'Sociais e aplicadas'),
+	('7', 'Saude');
 
 insert into curso values
 	('1','6','Administração'),
-    ('3','1','Agronomia - Integral'),
+    ('3','1','Agronomia'),
     ('4','3','Ciências Biológicas'),
     ('5','3','Ciência de Alimentos'),
     ('6','2','Engenharia Civil'),
@@ -51,7 +51,7 @@ insert into cargosDisponiveis values
     ('27', 'Secretaria Acadêmica');
 
 insert into disciplina 
-(`idDisciplina`,`nome_discipilina`,`creditos`,`carga_hora_teorica`,`carga_hora_pratica`,`semestreOfertado`)
+(`idDisciplina`,`nome_disciplina`,`creditos`,`carga_hora_teorica`,`carga_hora_pratica`,`semestreOfertado`)
 values
 ('CRP199','Cálculo Diferencial e Integral','4','4',default,'3'),
 ('CRP297','Sociologia Geral','4','4',default,'3'),
@@ -241,8 +241,29 @@ values
 (default,'João Batista Ribeiro','professor','Programação de Computadores e Redes de Computadores'),
 (default,'Larissa Ferreira Rodrigues','professor','Aprendizado de máquina e Processamento de Imagem'),
 (default,'Leandro Henrique Furtado Pinto Silva','professor','Engenharia de Software'),
-(default,'Henrique Peluzio','tecnico','Analista de sistemas');
+(default,'Henrique Peluzio','tecnico','Analista de sistemas'),
+(default,'Seu João','tecnico','jardineiro');
 
+insert into cargo
+(funcionario_idFuncionario,cargo_idCargo)
+values
+(1,3),
+(2,2),
+(3,1),
+(4,3),
+(5,2),
+(6,2),
+(7,1),
+(8,3),
+(9,2),
+(10,3),
+(11,1),
+(12,2),
+(13,3),
+(14,1),
+(15,2),
+(16,2),
+(17,1);
 
 insert into registro
 (funcionario_idFuncionario,email,sexo,cpf,identidade,UFidentidade,orgaoExpedidor,
@@ -285,18 +306,18 @@ values
 
 
 insert into aluno
-(`matricula`,`nome`,`curso_idCurso`,`anoConclusaoEnsMed`,`escola2oGrau`)
+(`matricula`,`nome`,`curso_idCurso`,`entrada_curso`,`escola2oGrau`)
 values
-(default,'Matheus Dias',10,2014,'Jose Hugo Guimaraes'),
-(default,'José Costa',10,2010,'Don Vito'),
+(default,'Matheus Dias',10,2014,'Jose Hugo'),
+(default,'José Costa',10,2012,'Don Vito'),
 (default,'Vinícius Rodrigues',10,2017,'Carlo'),
-(default,'Fernanda Maximus',10,2009,'Bonesera'),
+(default,'Fernanda Maximus',10,2014,'Bonesera'),
 (default,'Giovanna Marques',10,2015,'Luca'),
-(default,'Nicolas Campos',10,2011,'Jack'),
-(default,'Bernardo Boaventura',10,2009,'Tom Hagen'),
+(default,'Nicolas Campos',10,2012,'Jack'),
+(default,'Bernardo Boaventura',10,2015,'Tom Hagen'),
 (default,'Emanuela Amaral',10,2011,'Sollozo'),
 (default,'Agnes Menezzes',10,2015,'Tattaglia'),
-(default,'Wilian Mello',10,2007,'Sonny');
+(default,'Wilian Mello',10,2018,'Sonny');
 
 
 insert into registro
