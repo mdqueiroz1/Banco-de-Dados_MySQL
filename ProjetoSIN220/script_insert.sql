@@ -321,26 +321,31 @@ values
 
 
 insert into registro
-(aluno_matricula,email,sexo,cpf,identidade,UFidentidade,orgaoExpedidor,
-DataNascimento,cidade,cep,telefone)
+(`aluno_matricula`,`email`,`sexo`,`cpf`,`identidade`,`UFidentidade`,`orgaoExpedidor`,
+`DataNascimento`,`cidade`,`cep`,`telefone`)
 values
-(1,'matheus.d.queiroz@ufv.br','M','11210428644','123456789','MG','SSP','1996/05/08'
-'Carmo do Paranaiba','38840000','99796233'),
-(2,'josecosta@ufv.br','M','81905697406','483710027','MS','SSP','1990/15/07'
+ (1,'matheusd@ufv.br','M','11210428644','123456789','MG','SSP','1996/05/08',
+ 'Carmo do Paranaiba','38840000','99796233'),
+
+(2,'josecosta@ufv.br','M','81905697406','483710027','MS','SSP','1990/12/07',
 'Água Clara','79680000','9587632564'),
-(3,'viniciusrodrigues@ufv.br','M','66612931108','467466269','PR','SSP','1999'
+
+(3,'viniciusrodrigues@ufv.br','M','66612931108','467466269','PR','SSP','1999/06/07',
 'Cornélio Procópio','86300000','439524581'),
-(4,'fernandamaximus@ufv.br','F','20903006715','256115687','PA','SSP','1991/07/05'
+
+(4,'fernandamaximus@ufv.br','F','20903006715','256115687','PA','SSP','1991/07/05',
 'Belem','66999000','9198229682'),
-(5,'giovanamarques@ufv.br','F','24360782977','110336793','PR','SSP','1997/08/01'
+
+(5,'giovanamarques@ufv.br','F','24360782977','110336793','PR','SSP','1997/08/01',
 'Curitiba','82999000','419320289'),
-(6,'nicolascampos@ufv.br','M','10627663427','337310026','PR','SSP','1991/14/07'
+
+(6,'nicolascampos@ufv.br','M','10627663427','337310026','PR','SSP','1991/11/07',
 'Curitiba','82999000','4192700778'),
-(7,'bernardoboaventura@ufv.br','M','98981048487','110336793','MS','SSP','1991/26/01'
+(7,'bernardoboaventura@ufv.br','M','98981048487','110336793','MS','SSP','1991/06/01',
 'Água Clara','79680000','679185563'),
-(8,'emanuela.amaral@ufv.br','F','56560716341','468238992','MG','SSP','1992/18/05'
+(8,'emanuela.amaral@ufv.br','F','56560716341','468238992','MG','SSP','1992/07/05',
 'Belo Horizonte','30000000','3197759849'),
-(9,'agnesmenezzes@ufv.br','F','38291391440','468238992','MG','SSP','1997/02/11'
+(9,'agnesmenezzes@ufv.br','F','38291391440','468238992','MG','SSP','1997/02/11',
 'Belo Horizonte','30000000','319683413'),
-(10,'heitormello@ufv.br','M','42671546351','294854459','PE','SSP','1994/17/06'
+(10,'heitormello@ufv.br','M','42671546351','294854459','PE','SSP','1994/06/06',
 'Recife','50000000','819642161');
